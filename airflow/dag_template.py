@@ -1,6 +1,6 @@
 import dlt
 from airflow.decorators import dag
-from dlt.helpers import AirflowTasks
+from dlt.helpers import PipelineTasksGroup
 
 from pipedrive import pipedrive_source as source
 
@@ -24,7 +24,7 @@ default_args = {
 )
 def load_data():
     # store data on the bucket
-    tasks = AirflowTasks("pipeline_decomposed", use_data_folder=True)
+    tasks = PipelineTasksGroup("pipeline_decomposed", use_data_folder=True, wipe_local_data=False)
 
     p = dlt.pipeline(pipeline_name='pipeline_name',
                      dataset_name='dataset_name',
