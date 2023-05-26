@@ -1,5 +1,6 @@
 import dlt
 from airflow.decorators import dag
+from dlt.common import pendulum
 from dlt.helpers.airflow_helper import PipelineTasksGroup
 
 from pipedrive import pipedrive_source as source
@@ -18,7 +19,7 @@ default_args = {
 
 @dag(
     schedule=None,
-    start_date="2021-01-01T00:00:00Z",
+    start_date=pendulum.datetime(2021, 1, 1),
     catchup=False,
     default_args=default_args
 )
