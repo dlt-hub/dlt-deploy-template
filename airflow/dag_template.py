@@ -1,6 +1,6 @@
 import dlt
 from airflow.decorators import dag
-from dlt.helpers import PipelineTasksGroup
+from dlt.helpers.airflow_helper import PipelineTasksGroup
 
 from pipedrive import pipedrive_source as source
 
@@ -14,6 +14,7 @@ default_args = {
     'retries': 0,
     'max_active_runs': 1
 }
+
 
 @dag(
     schedule=None,
@@ -33,5 +34,6 @@ def load_data():
 
     # we keep secrets in `dlt_secrets_toml`, same for bigquery credentials
     tasks.add_run(p, source(), decompose="serialize", trigger_rule="all_done", retries=0, provide_context=True)
+
 
 load_data()
