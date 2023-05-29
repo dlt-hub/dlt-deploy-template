@@ -1,0 +1,5 @@
+# do not suggest to add those to run on airflow
+streamlit
+grpcio-status
+pip
+apache-airflow
